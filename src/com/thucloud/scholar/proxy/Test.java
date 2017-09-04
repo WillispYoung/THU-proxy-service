@@ -20,7 +20,6 @@ import java.util.concurrent.Executors;
 public class Test {
 
 	public static void main(String[] args) throws IOException {
-		// TODO 自动生成的方法存根
 		Client.initConfig();
 		Executor executor = Executors.newCachedThreadPool();
 		Client s = new Client(3128);

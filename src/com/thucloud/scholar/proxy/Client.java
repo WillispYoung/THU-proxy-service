@@ -32,7 +32,6 @@ public class Client implements Runnable {
 	private Date loginTime;
 	
 	public Client(int portNum) throws UnknownHostException {
-		// TODO 自动生成的构造函数存根
 		this.portNum = portNum;
 		this.ipAddr = InetAddress.getLocalHost();
 		this.loginTime = new Date();
