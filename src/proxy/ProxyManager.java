@@ -36,7 +36,7 @@ public class ProxyManager  {
 			Executor executor = Executors.newCachedThreadPool();
 			Client.initConfig();
 
-	        System.out.println("manager startup.");
+	        System.out.println("ProxyManager listening on port " + Integer.toString(listenPort));
 	        while (true) {
 	            try {
 	                Socket s = ss.accept();
