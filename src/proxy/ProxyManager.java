@@ -82,14 +82,15 @@ class Handler extends Thread {
 
             	Client s = new Client(portNum);
 				executor.execute(s);
-				System.out.println("open port"+portNum+"type"+type);
+				System.out.println("open port" + portNum + "type" + type);
 				if (type != 0) {
 					Runtime.getRuntime().exec("iptables -A OUTPUT -p tcp --sport "+portNum+" -j ACCEPT");
 					Runtime.getRuntime().exec("iptables -t mangle -A OUTPUT -p tcp --sport "+portNum+" -j MARK --set-mark "+(portNum-10000));
 					Runtime.getRuntime().exec("tc class add dev eth9 parent  1: classid 1:"+(portNum-10000)+" htb rate "+ProxyManager.bandwidth.get(type)+"mbit ceil "+(ProxyManager.bandwidth.get(type)+1)+"mbit burst 20k");
 					Runtime.getRuntime().exec("tc filter add dev eth9 parent 1: protocol ip prio 1 handle "+(portNum-10000)+" fw classid 1:"+(portNum-10000));
 				}
-			} else if (head.equals("upgrade")) {
+			}
+			else if (head.equals("upgrade")) {
 				int portNum = 0, type = 0;
             	portNum = Integer.parseInt(msg.split(",")[0]);
             	type = (int)Float.parseFloat(msg.split(",")[1]);
@@ -98,7 +99,8 @@ class Handler extends Thread {
             		Runtime.getRuntime().exec("tc class change dev eth9 parent  1: classid 1:"+(portNum-10000)+" htb rate "+ProxyManager.bandwidth.get(type)+"mbit ceil "+(ProxyManager.bandwidth.get(type)+1)+"mbit burst 20k");
 				}
 				Runtime.getRuntime().exec("iptables -D INPUT -p tcp --dport "+portNum+" -j DROP");
-			} else if (head.equals("downgrade")) {
+			} 
+			else if (head.equals("downgrade")) {
 				int portNum = 0, type = 0;
             	portNum = Integer.parseInt(msg.split(",")[0]);
             	type = (int)Float.parseFloat(msg.split(",")[1]);
@@ -106,7 +108,8 @@ class Handler extends Thread {
             	if (type != 0) {
             		Runtime.getRuntime().exec("tc class change dev eth9 parent  1: classid 1:"+(portNum-10000)+" htb rate "+ProxyManager.bandwidth.get(type)+"mbit ceil "+(ProxyManager.bandwidth.get(type)+1)+"mbit burst 20k");
 				}
-			} else if (head.equals("reopen")) {
+			} 
+			else if (head.equals("reopen")) {
 				int portNum = 0;
 				portNum = Integer.parseInt(msg);
 				System.out.println("reopen port"+portNum);
@@ -126,7 +129,8 @@ class Handler extends Thread {
 					System.out.println("2");
 				}
 
-			} else if (head.equals("close")) {
+			} 
+			else if (head.equals("close")) {
 				int portNum = 0, type;
 				portNum = Integer.parseInt(msg.split(",")[0]);
             	type = Integer.parseInt(msg.split(",")[1]);
@@ -136,7 +140,8 @@ class Handler extends Thread {
 				BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("/proxy/over_flow/"+String.valueOf(portNum)+"."+String.valueOf(type)))));
 				out.write(" ");
 				out.close();
-			} else if (head.equals("getflow")) {
+			} 
+			else if (head.equals("getflow")) {
 				int portNum = 0;
 				portNum = Integer.parseInt(msg);
 
@@ -151,7 +156,8 @@ class Handler extends Thread {
 				outStream.write(String.valueOf(flowResult));
 				System.out.println("get "+portNum+" flow result "+ flowResult);;
 				outStream.flush();
-			} else if (head.equals("preflow")) {
+			} 
+			else if (head.equals("preflow")) {
 				int portNum = 0;
 				portNum = Integer.parseInt(msg);
 
@@ -166,7 +172,8 @@ class Handler extends Thread {
 				outStream.write(String.valueOf(flowResult));
 				System.out.println("get "+portNum+" pre flow "+ flowResult);;
 				outStream.flush();
-			} else if (head.equals("getIP")) {
+			} 
+			else if (head.equals("getIP")) {
 				int portNum = 0;
 				portNum = Integer.parseInt(msg);
 
@@ -208,9 +215,11 @@ class Handler extends Thread {
 			else {
 				System.err.println("error message");
 			}
+
 			socket.close();
             System.out.println("done.");
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
         	System.out.println(e);
         }
     }
