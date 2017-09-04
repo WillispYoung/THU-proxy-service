@@ -3,3 +3,6 @@ scripts/*.mmdb
 
 # flow result
 flows/
+
+# java compile output
+*.class
