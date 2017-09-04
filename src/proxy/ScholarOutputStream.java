@@ -1,4 +1,4 @@
-package com.thucloud.scholar.proxy;
+package proxy;
 
 import java.io.IOException;
 import java.io.OutputStream;
