@@ -54,7 +54,7 @@ public class Client implements Runnable {
 						String loginTimeStr = this.dateFormat.format(this.loginTime);
 						this.ipAddr = sock.getInetAddress();
 						System.out.println("address of port "+portNum+" change to "+ipAddr+" at "+loginTime);
-						Runtime.getRuntime().exec("/home/zy/script/record_ip.sh "+portNum+" "+ipAddr.getHostAddress()+" "+loginTimeStr);
+						Runtime.getRuntime().exec("python3 /root/THU-proxy-service/scripts/record_ip.py "+portNum+" "+ipAddr.getHostAddress()+" "+loginTimeStr);
 					}
 				}
 				onAccept(executor, sock);
