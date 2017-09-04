@@ -118,7 +118,7 @@ public class Server{
 
 
 	private static void initConfig() {
-		Config.loadConfig("servers.conf");
+		Config.loadConfig("../servers.conf");
 		proxyHost = Config.get("proxy-host", "127.0.0.1");
 		proxyPort = Config.get("proxy-port", 3128);
 		listenPort = Config.get("listen-port", 4129);
