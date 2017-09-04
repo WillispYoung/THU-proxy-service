@@ -1,3 +1,5 @@
 # database for get_ip_addr.py
 scripts/*.mmdb
 
+# flow result
+flows/
