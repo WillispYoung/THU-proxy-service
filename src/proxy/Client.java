@@ -40,7 +40,7 @@ public class Client implements Runnable {
 	@Override
 	public void run() {
 		Executor executor = Executors.newCachedThreadPool();
-		System.out.println("listen:"+this.portNum);
+		System.out.println("Client listening on port "+this.portNum);
 		
 		try {
 			ServerSocket ss = new ServerSocket(portNum);

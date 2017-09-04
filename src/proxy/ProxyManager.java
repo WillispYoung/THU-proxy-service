@@ -70,7 +70,7 @@ class Handler extends Thread {
             BufferedReader in = new BufferedReader(new InputStreamReader(is));
 
             String data = in.readLine();
-            System.out.println("read line " + " :" + data);
+            // System.out.println("read line " + " :" + data);
             String head = null, msg = null;
             head = data.split("@")[0];
             msg = data.split("@")[1];
@@ -82,7 +82,7 @@ class Handler extends Thread {
 
             	Client s = new Client(portNum);
 				executor.execute(s);
-				System.out.println("open port" + portNum + "type" + type);
+				System.out.println("open port: " + portNum + ", type:" + type);
 				if (type != 0) {
 					Runtime.getRuntime().exec("iptables -A OUTPUT -p tcp --sport "+portNum+" -j ACCEPT");
 					Runtime.getRuntime().exec("iptables -t mangle -A OUTPUT -p tcp --sport "+portNum+" -j MARK --set-mark "+(portNum-10000));
