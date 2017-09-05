@@ -10,7 +10,7 @@ cur = db.cursor()
 cur.execute("select * from thuproxy_proxyaccount")
 
 for r in cur:
-	user_type = r[2]
+    user_type = r[2]
     expire_time = r[4]
     port = r[5]
 
