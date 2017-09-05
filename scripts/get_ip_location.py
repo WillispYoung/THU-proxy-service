@@ -3,7 +3,7 @@
 import geoip2.database
 import sys
 
-reader = geoip2.database.Reader("GeoLite2-City.mmdb")
+reader = geoip2.database.Reader("/root/THU-proxy-service/scripts/GeoLite2-City.mmdb")
 ip = sys.argv[1]
 res = reader.city(ip)
 
