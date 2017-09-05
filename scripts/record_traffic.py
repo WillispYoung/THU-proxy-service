@@ -8,4 +8,4 @@ import subprocess
 proc = subprocess.Popen("iptables -L -v -n -c", stdout=subprocess.PIPE)
 output = proc.stdout.read()
 
-print output
+print(output)
