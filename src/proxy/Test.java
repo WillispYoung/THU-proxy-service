@@ -24,9 +24,7 @@ public class Test {
 		System.out.println(ip);
 		Process process = Runtime.getRuntime().exec("python3 /root/THU-proxy-service/scripts/get_ip_location.py " + ip);
        	BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String l;
-        while ((l = input.readLine()) != null)
-	        System.out.println(l);
+        String l = input.readLine();
         input.close();
 	}
 }

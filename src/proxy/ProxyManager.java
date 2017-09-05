@@ -84,8 +84,8 @@ class Handler extends Thread {
 				executor.execute(s);
 				System.out.println("open port: " + portNum + ", type:" + type);
 				if (type != 0) {
-					Runtime.getRuntime().exec("iptables -A OUTPUT -p tcp --sport "+portNum+" -j ACCEPT");
-					Runtime.getRuntime().exec("iptables -t mangle -A OUTPUT -p tcp --sport "+portNum+" -j MARK --set-mark "+(portNum-10000));
+					Runtime.getRuntime().exec("iptables -A OUTPUT -p tcp --sport " + portNum);
+					// Runtime.getRuntime().exec("iptables -t mangle -A OUTPUT -p tcp --sport "+portNum+" -j MARK --set-mark "+(portNum-10000));
 					Runtime.getRuntime().exec("tc class add dev eth0 parent  1: classid 1:"+(portNum-10000)+" htb rate "+ProxyManager.bandwidth.get(type)+"mbit ceil "+(ProxyManager.bandwidth.get(type)+1)+"mbit burst 20k");
 					Runtime.getRuntime().exec("tc filter add dev eth0 parent 1: protocol ip prio 1 handle "+(portNum-10000)+" fw classid 1:"+(portNum-10000));
 				}
@@ -113,9 +113,6 @@ class Handler extends Thread {
 				int portNum = 0;
 				portNum = Integer.parseInt(msg);
 				System.out.println("reopen port"+portNum);
-
-				Runtime.getRuntime().exec("iptables -D INPUT -p tcp --dport "+portNum+" -j DROP");
-				Runtime.getRuntime().exec("iptables -D INPUT -p tcp --dport "+portNum+" -j DROP");
 				Runtime.getRuntime().exec("iptables -D INPUT -p tcp --dport "+portNum+" -j DROP");
 
 				File file = new File("/proxy/over_flow/"+portNum+".1");
@@ -154,7 +151,7 @@ class Handler extends Thread {
 				}
 
 				outStream.write(String.valueOf(flowResult));
-				System.out.println("get "+portNum+" flow result "+ flowResult);;
+				System.out.println("get "+portNum+" flow result "+ flowResult);
 				outStream.flush();
 			} 
 			else if (head.equals("preflow")) {
@@ -170,7 +167,7 @@ class Handler extends Thread {
 				}
 
 				outStream.write(String.valueOf(flowResult));
-				System.out.println("get "+portNum+" pre flow "+ flowResult);;
+				System.out.println("get "+portNum+" pre flow "+ flowResult);
 				outStream.flush();
 			} 
 			else if (head.equals("getIP")) {

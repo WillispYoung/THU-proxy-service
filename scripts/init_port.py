@@ -22,16 +22,15 @@ for r in cur:
     expire = int(time.mktime(time.strptime(str(expire_time), "%Y-%m-%d")))
     now = int(time.time())
 
-    # account already expire
     if expire < now:
         continue
 
     cmd = "addport@" + str(port) + "," + str(user_type)
-    print(cmd)
     control = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    control.connect(("118.190.151.42", 4127))
+    control.connect(("localhost", 4127))
     control.send(bytes(cmd, encoding="utf-8"))
     control.close()
+
 
 cur.close()
 db.close()

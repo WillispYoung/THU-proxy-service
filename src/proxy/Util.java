@@ -63,7 +63,7 @@ public class Util {
 		}
 		inFile.close();
 
-		// 先去掉前两行
+		// first remove last two line
 		line = stack.pop();
 		if (line != null) {
 			line = stack.pop();
@@ -86,11 +86,11 @@ public class Util {
 			return 0;
 		}
 
-		// last two line
+		// second line from bottom
 		line = stack.pop();
-		if (line.contains(":")) {	// correct
+		if (line.contains(":")) {
 			time = formatter.parse(line);
-		} else {	// wrong
+		} else {
 			System.out.println("error: flow result" + portNum);
 			return 0;
 		}
@@ -133,10 +133,6 @@ public class Util {
             process = Runtime.getRuntime().exec("python3 /root/THU-proxy-service/scripts/get_ip_location.py "+IPAdress);
             BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String l = input.readLine();
-            // l = l.substring(2, l.length()-1);
-            // System.out.println(l);
-            // l = l.replaceAll(".x", "%");
-            // System.out.println("getIPAdress: "IPAdress + " location: " + l);
             IPAdress += "@"+l;
             input.close();
         } catch (IOException e) {
@@ -188,13 +184,9 @@ public class Util {
 				try {
 					Process process = null;
 					System.out.println(ip);
-		            process = Runtime.getRuntime().exec("python3 /home/zy/script/getcity.py "+ip);
+		            process = Runtime.getRuntime().exec("python3 /root/THU-proxy-service/scripts/get_ip_location.py "+ip);
 		            BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
 		            String l = input.readLine();
-		            l = l.substring(2, l.length()-1);
-		            System.out.println(l);
-		            l = l.replaceAll(".x", "%");
-		            System.out.println(l);
 		            IPInfo[count++] += "@"+l;
 		            input.close();
 		        } catch (IOException e) {
@@ -202,7 +194,6 @@ public class Util {
 		            IPInfo[count++] += "@";
 		        }
 			} catch (EmptyStackException e) {
-				// TODO: handle exception
 				System.out.println(e);
 				break;
 			}
