@@ -1,6 +1,7 @@
 # python3
 
 import pymysql
+import time
 import subprocess
 
 db = pymysql.connect(host="58.205.208.72", port=8779,
