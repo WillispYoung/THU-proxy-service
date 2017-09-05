@@ -5,7 +5,7 @@
 
 import subprocess
 
-proc = subprocess.Popen("iptables -L -v -n -c", stdout=subprocess.PIPE)
+proc = subprocess.Popen("iptables -L -v -n -c", stdout=subprocess.PIPE, shell=True)
 output = proc.stdout.read()
 
 print(output)
