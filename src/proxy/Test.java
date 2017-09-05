@@ -20,9 +20,11 @@ import java.util.concurrent.Executors;
 public class Test {
 
 	public static void main(String[] args) throws IOException {
-		Client.initConfig();
-		Executor executor = Executors.newCachedThreadPool();
-		Client s = new Client(3128);
-		executor.execute(s);
+		String ip = args[0];
+		Process process = Runtime.getRuntime().exec("python3 /root/THU-proxy-service/scripts/get_ip_location.py " + ip);
+       	BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String l = input.readLine();
+        System.out.println(l);
+        input.close();
 	}
 }
