@@ -22,6 +22,7 @@ for r in cur:
     expire = int(time.mktime(time.strptime(str(expire_time), "%Y-%m-%d")))
     now = int(time.time())
 
+    # account expireds
     if expire < now:
         continue
 
