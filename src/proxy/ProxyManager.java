@@ -63,7 +63,7 @@ class Handler extends Thread {
 
     @Override
     public void run() {
-        System.out.println("in handling..");
+        // System.out.println("in handling..");
 
         try {
             InputStream is = socket.getInputStream();
@@ -86,8 +86,8 @@ class Handler extends Thread {
 				if (type != 0) {
 					Runtime.getRuntime().exec("iptables -A OUTPUT -p tcp --sport "+portNum+" -j ACCEPT");
 					Runtime.getRuntime().exec("iptables -t mangle -A OUTPUT -p tcp --sport "+portNum+" -j MARK --set-mark "+(portNum-10000));
-					Runtime.getRuntime().exec("tc class add dev eth9 parent  1: classid 1:"+(portNum-10000)+" htb rate "+ProxyManager.bandwidth.get(type)+"mbit ceil "+(ProxyManager.bandwidth.get(type)+1)+"mbit burst 20k");
-					Runtime.getRuntime().exec("tc filter add dev eth9 parent 1: protocol ip prio 1 handle "+(portNum-10000)+" fw classid 1:"+(portNum-10000));
+					Runtime.getRuntime().exec("tc class add dev eth0 parent  1: classid 1:"+(portNum-10000)+" htb rate "+ProxyManager.bandwidth.get(type)+"mbit ceil "+(ProxyManager.bandwidth.get(type)+1)+"mbit burst 20k");
+					Runtime.getRuntime().exec("tc filter add dev eth0 parent 1: protocol ip prio 1 handle "+(portNum-10000)+" fw classid 1:"+(portNum-10000));
 				}
 			}
 			else if (head.equals("upgrade")) {
@@ -96,7 +96,7 @@ class Handler extends Thread {
             	type = (int)Float.parseFloat(msg.split(",")[1]);
 
             	if (type != 0) {
-            		Runtime.getRuntime().exec("tc class change dev eth9 parent  1: classid 1:"+(portNum-10000)+" htb rate "+ProxyManager.bandwidth.get(type)+"mbit ceil "+(ProxyManager.bandwidth.get(type)+1)+"mbit burst 20k");
+            		Runtime.getRuntime().exec("tc class change dev eth0 parent  1: classid 1:"+(portNum-10000)+" htb rate "+ProxyManager.bandwidth.get(type)+"mbit ceil "+(ProxyManager.bandwidth.get(type)+1)+"mbit burst 20k");
 				}
 				Runtime.getRuntime().exec("iptables -D INPUT -p tcp --dport "+portNum+" -j DROP");
 			} 
@@ -106,7 +106,7 @@ class Handler extends Thread {
             	type = (int)Float.parseFloat(msg.split(",")[1]);
 
             	if (type != 0) {
-            		Runtime.getRuntime().exec("tc class change dev eth9 parent  1: classid 1:"+(portNum-10000)+" htb rate "+ProxyManager.bandwidth.get(type)+"mbit ceil "+(ProxyManager.bandwidth.get(type)+1)+"mbit burst 20k");
+            		Runtime.getRuntime().exec("tc class change dev eth0 parent  1: classid 1:"+(portNum-10000)+" htb rate "+ProxyManager.bandwidth.get(type)+"mbit ceil "+(ProxyManager.bandwidth.get(type)+1)+"mbit burst 20k");
 				}
 			} 
 			else if (head.equals("reopen")) {
@@ -185,7 +185,7 @@ class Handler extends Thread {
 					IPAddress = "@";
 				}
 				outStream.write(IPAddress);
-				System.out.println("get "+portNum+" IP "+ IPAddress);;
+				System.out.println("getIP on "+portNum+": "+ IPAddress);
 				outStream.flush();
 			}
 			else if (head.equals("getIPList")) {

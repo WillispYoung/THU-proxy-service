@@ -130,13 +130,13 @@ public class Util {
 
 		try {
 			Process process = null;
-            process = Runtime.getRuntime().exec("python3 /home/zy/script/getcity.py "+IPAdress);
+            process = Runtime.getRuntime().exec("python3 /root/THU-proxy-service/scripts/get_ip_location.py "+IPAdress);
             BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String l = input.readLine();
-            l = l.substring(2, l.length()-1);
-            System.out.println(l);
-            l = l.replaceAll(".x", "%");
-            System.out.println(l);
+            // l = l.substring(2, l.length()-1);
+            // System.out.println(l);
+            // l = l.replaceAll(".x", "%");
+            // System.out.println("getIPAdress: "IPAdress + " location: " + l);
             IPAdress += "@"+l;
             input.close();
         } catch (IOException e) {
