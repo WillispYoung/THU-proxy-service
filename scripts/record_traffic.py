@@ -7,6 +7,7 @@ import subprocess
 
 proc = subprocess.Popen("iptables -L -v -n -x", stdout=subprocess.PIPE, shell=True)
 output = proc.stdout.read()
-output = output.replace("\n", "\r\n")
 
-print(output)
+f = open("/root/THU-proxy-service/log/traffic.log")
+f.write(output)
+f.close()
