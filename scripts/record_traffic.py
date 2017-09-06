@@ -24,7 +24,7 @@ while i < count:
         i += 2
         while i < count:
             l = lines[i]
-            print(l)
+            print(l + "-")
             if len(l) == 0:
                 break
             t = p.split(l)
