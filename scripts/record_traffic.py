@@ -20,6 +20,7 @@ i = 0
 p = re.compile(r' +')
 count = len(lines)
 while i < count:
+	print(lines[i])
     if lines[i].startswith("Chain"):
         i += 2
         while i < count:
