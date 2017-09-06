@@ -33,17 +33,17 @@ public class Util {
 		line = stack.pop();
 		if (!line.contains(":")) {
 			rawResult = Float.parseFloat(line);
-		}else {	// wrong
+		} else {  // format error
 			System.out.println("error: flow result" + portNum);
 			inFile.close();
 			return 0;
 		}
 
-		// last two line
+		// 2nd line from the bottom
 		line = stack.pop();
-		if (line.contains(":")) {	// correct
+		if (line.contains(":")) {
 			time = formatter.parse(line);
-		} else {	// wrong
+		} else {  // format error
 			System.out.println("error: flow result" + portNum);
 		}
 		inFile.close();
@@ -63,7 +63,7 @@ public class Util {
 		}
 		inFile.close();
 
-		// first remove last two line
+		// ignore last 2 lines
 		line = stack.pop();
 		if (line != null) {
 			line = stack.pop();
@@ -77,16 +77,16 @@ public class Util {
 		}
 
 
-		// last line
+		// 3rd line from the bottom
 		line = stack.pop();
 		if (!line.contains(":")) {
 			rawResult = Float.parseFloat(line);
-		}else {	// wrong
+		}else {
 			System.out.println("error: flow result" + portNum);
 			return 0;
 		}
 
-		// second line from bottom
+		// 4th line from the bottom
 		line = stack.pop();
 		if (line.contains(":")) {
 			time = formatter.parse(line);
