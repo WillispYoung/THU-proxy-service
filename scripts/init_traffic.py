@@ -46,7 +46,7 @@ for r in cur:
     user_type = r[2]
     expire_time = r[4]
     port = r[5]
-    traffic = r[7] *1024*1024
+    traffic = int(r[6] * 1024 * 1024)
 
     w = open("/proxy/flow/" + str(port) + ".flow", "a")
     now = time.strftime("%m-%d,%H:%M:%S", time.localtime(time.time()))
