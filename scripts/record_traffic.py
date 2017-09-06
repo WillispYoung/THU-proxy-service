@@ -16,7 +16,7 @@ output = output.replace("\n", "\r\n")
 lines = output.split("\n")
 record = dict()
 for l in lines:
-	print(l)
+    print(l)
 
 return
 
