@@ -18,7 +18,7 @@ record = dict()
 for l in lines:
     print(l)
 
-return
+exit(0)
 
 i = 0
 p = re.compile(r' +')
