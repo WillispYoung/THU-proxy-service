@@ -15,10 +15,6 @@ output = output.replace("\n", "\r\n")
 # output = open("D:/CodeSpace/Python/traffic.log").read()
 lines = output.split("\n")
 record = dict()
-for l in lines:
-    print(l)
-
-exit(0)
 
 i = 0
 p = re.compile(r' +')
@@ -29,6 +25,7 @@ while i < count:
         i += 2
         while i < count:
             l = lines[i]
+            print(l)
             if len(l) == 0:
                 break
             t = p.split(l)
