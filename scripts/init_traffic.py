@@ -48,7 +48,7 @@ for r in cur:
     port = r[5]
     traffic = r[7] *1024*1024
 
-    w = open("/proxy/flow/" + str(port) + "/flow", "a")
+    w = open("/proxy/flow/" + str(port) + ".flow", "a")
     now = time.strftime("%m-%d,%H:%M:%S", time.localtime(time.time()))
     
     w.write(now + "\n")
