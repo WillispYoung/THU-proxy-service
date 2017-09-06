@@ -18,7 +18,7 @@ for f in files:
 
 while True:
     now = time.strftime("%m-%d,%H:%M:%S", time.localtime(time.time()))
-    hour = int(now.split(",")[1].split("":)[0])
+    hour = int(now.split(",")[1].split(":")[0])
     if hour % 2 != 0:
         time.sleep(1800)
         continue
