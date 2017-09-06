@@ -19,9 +19,9 @@ for f in files:
 while True:
     now = time.strftime("%m-%d,%H:%M:%S", time.localtime(time.time()))
     hour = int(now.split(",")[1].split(":")[0])
-    if hour % 2 != 0:
-        time.sleep(1800)
-        continue
+    # if hour % 2 != 0:
+    #     time.sleep(1800)
+    #     continue
 
     # yesterday = str(datetime.date.today() - datetime.timedelta(days=1))[5:]
     output = os.popen("iptables -L -v -n -x").read()
@@ -55,3 +55,5 @@ while True:
 
     os.popen("iptables -Z INPUT")
     os.popen("iptables -Z OUTPUT")
+
+    break
