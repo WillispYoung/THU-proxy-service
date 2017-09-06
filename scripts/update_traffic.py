@@ -7,6 +7,7 @@ import time
 import subprocess
 import glob
 import os
+import re
 
 files = glob.glob("/proxy/flow/*.flow")
 record = dict()
