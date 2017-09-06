@@ -23,8 +23,7 @@ while True:
     if hour % 2 != 0:
         time.sleep(1800)
         continue
-
-    # yesterday = str(datetime.date.today() - datetime.timedelta(days=1))[5:]
+    
     output = os.popen("iptables -L -v -n -x").read()
     lines = output.split("\n")
 
@@ -51,8 +50,10 @@ while True:
     for p in record:
         w = open("/proxy/flow/" + str(p) + ".flow", "a")
         w.write(now + "\n")
-        w.write(str(record[p]))
+        w.write(str(record[p]) + "\n")
         w.close()
 
     os.popen("iptables -Z INPUT")
     os.popen("iptables -Z OUTPUT")
+
+    time.sleep(3600)
