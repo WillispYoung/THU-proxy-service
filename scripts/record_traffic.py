@@ -13,7 +13,7 @@ output = output.replace("\n", "\r\n")
 # f.close()
 
 # output = open("D:/CodeSpace/Python/traffic.log").read()
-lines = output.split("\n")
+lines = output.split("\r\n")
 record = dict()
 
 i = 0
