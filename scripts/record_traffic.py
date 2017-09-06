@@ -5,6 +5,9 @@
 
 import os
 import re
+import pymysql
+import socket
+import time
 
 output = os.popen("iptables -L -v -n -x").read()
 output = output.replace("\n", "\r\n")
@@ -13,7 +16,7 @@ output = output.replace("\n", "\r\n")
 # f.close()
 
 # output = open("D:/CodeSpace/Python/traffic.log").read()
-lines = output.split("\r\n")
+lines = output.split("\r\n")  # on linux
 record = dict()
 
 i = 0
@@ -24,7 +27,6 @@ while i < count:
         i += 2
         while i < count:
             l = lines[i]
-            print(l + "-")
             if len(l) == 0:
                 break
             t = p.split(l)
@@ -39,3 +41,28 @@ while i < count:
 
 for k in record:
     print(k, record[k])
+
+db = pymysql.connect(host="58.205.208.72", port=8779,
+                     user="root", password="thuproxy",
+                     database="thuproxy")
+cur = db.cursor()
+cur.execute("select * from thuproxy_proxyaccount")
+
+for r in cur:
+    user_type = r[2]
+    expire_time = r[4]
+    port = r[5]
+    traffic = r[7] *1024*1024
+
+    w = open("/proxy/flow/" + str(port) + "/flow", "a")
+    now = time.strftime("%m-%d,%H:%M:%S"time.localtime(time.time()))
+    
+    w.write(now + "\n")
+    if port in record:
+    	traffic += record[port]
+    w.write(str(traffic) + "\n")
+    w.close()
+
+
+cur.close()
+db.close()
