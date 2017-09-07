@@ -69,10 +69,10 @@ public class Client implements Runnable {
 	private static AtomicInteger threadCount = new AtomicInteger(0);
 	
 	public static void onAccept(Executor executor, final Socket s) throws SocketException, IOException {
-		s.setSoTimeout(10000);
+		s.setSoTimeout(20000);
 		try {
 			final Socket s2 = new Socket(serverHost, serverPort);
-			s2.setSoTimeout(10000);
+			s2.setSoTimeout(20000);
 			Runnable t1 = new Runnable() {
 				@Override
 				public void run() {

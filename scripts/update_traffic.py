@@ -20,10 +20,12 @@ for f in files:
 while True:
     now = time.strftime("%m-%d,%H:%M:%S", time.localtime(time.time()))
     hour = int(now.split(",")[1].split(":")[0])
+
+    # update roughly every 2 hours
     if hour % 2 != 0:
         time.sleep(1800)
         continue
-    
+
     output = os.popen("iptables -L -v -n -x").read()
     lines = output.split("\n")
 
@@ -56,4 +58,5 @@ while True:
     os.popen("iptables -Z INPUT")
     os.popen("iptables -Z OUTPUT")
 
+    # sleep to next hour
     time.sleep(3600)
