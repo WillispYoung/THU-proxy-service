@@ -19,12 +19,12 @@ for r in cur:
     if user_type == 0:
         continue
 
-    expire = int(time.mktime(time.strptime(str(expire_time), "%Y-%m-%d")))
-    now = int(time.time())
+    #expire = int(time.mktime(time.strptime(str(expire_time), "%Y-%m-%d")))
+    #now = int(time.time())
 
     # account expireds
-    if expire < now:
-        continue
+    #if expire < now:
+       # continue
 
     cmd = "addport@" + str(port) + "," + str(user_type)
     control = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
