@@ -28,6 +28,5 @@ for r in cur:
     w.write(str(traffic) + "\n")
     w.close()
 
-
 cur.close()
 db.close()
