@@ -2,7 +2,7 @@
 
 import pymysql
 import time
-import subprocess
+import os
 
 db = pymysql.connect(host="58.205.208.72", port=8779,
                      user="root", password="thuproxy",
@@ -25,8 +25,8 @@ for r in cur:
     if expire < now:
         continue
 
-    subprocess.Popen("iptables -A INPUT -p tcp --dport " + str(port), shell=True)
-    subprocess.Popen("iptables -A OUTPUT -p tcp --sport " + str(port), shell=True)
+    os.system("iptables -A INPUT -p tcp --dport " + str(port))
+    os.system("iptables -A OUTPUT -p tcp --sport " + str(port))
 
 cur.close()
 db.close()
