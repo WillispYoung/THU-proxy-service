@@ -2,6 +2,8 @@ import re
 import os
 import time
 
+record = dict()
+
 while True:
     now = time.strftime("%m-%d,%H:%M:%S", time.localtime(time.time()))
     hour = int(now.split(",")[1].split(":")[0])
@@ -19,17 +21,24 @@ while True:
         if len(tup) == 10 or len(tup) == 11:
             try:
                 port = int(tup[-1].split(":")[-1])
-                if port == -1:
-                    continue
-                traffic = tup[1]
+                if port in res:
+                    res[port] += int(traffic)
+                else:
+                    res[port] = int(tup[1])
 
-                w = open("/proxy/flow/" + str(port) + ".flow", "a")
-                w.write(now + "\n")
-                w.write(traffic + "\n")
-                print(str(port) + ": " + now + " " + traffic)
-                w.close()
+                # w = open("/proxy/flow/" + str(port) + ".flow", "a")
+                # w.write(now + "\n")
+                # w.write(traffic + "\n")
+                # print(str(port) + ": " + now + " " + traffic)
+                # w.close()
 
             except ValueError:
                 continue
+
+    for p in record:
+        w = open("/proxy/flow/" + str(p) + ".flow", "a")
+        w.write(now + "\n")
+        w.write(str(record[p]) + "\n")
+        w.close()
 
     time.sleep(3600)
