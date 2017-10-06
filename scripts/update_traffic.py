@@ -21,7 +21,7 @@ while True:
         if len(tup) == 10 or len(tup) == 11:
             try:
                 port = int(tup[-1].split(":")[-1])
-                if port in res:
+                if port in record:
                     record[port] += int(tup[1])
                 else:
                     record[port] = int(tup[1])
