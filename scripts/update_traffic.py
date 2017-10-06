@@ -22,9 +22,9 @@ while True:
             try:
                 port = int(tup[-1].split(":")[-1])
                 if port in res:
-                    res[port] += int(traffic)
+                    record[port] += int(tup[1])
                 else:
-                    res[port] = int(tup[1])
+                    record[port] = int(tup[1])
 
                 # w = open("/proxy/flow/" + str(port) + ".flow", "a")
                 # w.write(now + "\n")
