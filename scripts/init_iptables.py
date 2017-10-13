@@ -25,8 +25,9 @@ for r in cur:
     if expire < now:
         continue
 
-    os.system("iptables -A INPUT -p tcp --dport " + str(port))
     os.system("iptables -A OUTPUT -p tcp --sport " + str(port))
+    # os.system("iptables -t mangle -A OUTPUT -p tcp --sport " + str(port) + " -j MARK --set-mark " + str(port-10000))
+
 
 cur.close()
 db.close()
