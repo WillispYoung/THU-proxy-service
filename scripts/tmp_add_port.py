@@ -11,7 +11,5 @@ control.connect(("localhost", 4127))
 control.send(bytes(cmd, encoding="utf-8"))
 control.close()
 
-os.popen("iptables -A INPUT -p tcp --dport " + port)
 os.popen("iptables -A OUTPUT -p tcp --sport " + port)
-
 print("open port " + port + " with type " + utype + " done!")
